@@ -7,9 +7,8 @@ import { RootQuery } from './graphql/schema'
 
 const app = express()
 
-const port = process.env.PORT || 3001
+const port = process.env.API_PORT
 
-// Connect to DB
 const dbUrl = process.env.ENV !== 'prod'
   ? process.env.LOCAL_DB_URL
   : process.env.REMOTE_DB_URL
@@ -22,6 +21,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   next()
 })
+
 app.use('/graphql', expressGraphQL({
   schema: RootQuery,
   graphiql: true
